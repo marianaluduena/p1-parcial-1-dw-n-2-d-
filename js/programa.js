@@ -31,40 +31,13 @@ const ingresarNombreDelDisco = nombre => {
     return nombre;
 }
 
-// ingresarNombreDelDisco();
-
-/*
-// Necesito un lugar para guardar los discos ingresados
-
-
-function guardarDisco() {
-
-    let escribirDisco = "";
-    escribirDisco += `<ul>`
-
-    // necesito un nro para recorrer el array
-
-    let cantidadDeDiscos = this.coleccionDiscos.lenght;
-
-    for (let i = 0; i < cantidadDeDiscos.lenght; i++) {
-
-        // variable donde se guardará la cantidad de discos dentro de un tag li
-
-        escribirDisco += `<li>${this.coleccionDiscos[i]}</li>`;
-    }
-    escribirDisco += `</ul>`
-    document.write(escribirDisco);
-}
-
-guardarDisco();*/
-
 // 2) PEDIR AUTOR DEL DISCO 
 
 const autorDelDisco = autor => {
 
     this.autor = prompt("Ingrese el autor o grupo del disco");
     while (this.autor == "") {
-        mensaje = alert("Debe ingresar el nombre del disco");
+        mensaje = alert("Debe ingresar el autor o grupo del disco");
         this.autor = prompt("Ingrese el autor o grupo del disco");
     }
 
@@ -104,13 +77,9 @@ const codigoDeldisco = (ingresarCodigo, codigo) => {
 
 // 4) CARGAR LAS PISTAS
 
+const cargarPistaYDuracion = (nombreDePista, duracion) => {
 
-let cargarPistas = (nombreDePista, duracion) => {
-
-    
-    // pedir el nombre de la pista
     nombreDePista = prompt("Ingrese el nombre de la pista");
-
     // verificar que el dato no quede vacío
 
     while (nombreDePista == "") {
@@ -118,7 +87,10 @@ let cargarPistas = (nombreDePista, duracion) => {
         nombreDePista = prompt("Ingrese el nombre de la pista");
     }
 
-    // Pedir la duración de la pista
+    // Array donde se irán guardando todos los nombres de las pistas
+    let listaNombresDePistas = [nombreDePista];
+
+    // Luego pedir la duración de la pista
 
     duracion = parseInt(prompt("Ingrese la duración de la pista medida en segundos."));
 
@@ -128,25 +100,54 @@ let cargarPistas = (nombreDePista, duracion) => {
 
         mensaje = alert("La duración tiene que estar entre 0 y 7200 segundos inclusive. Por favor intente de nuevo");
         duracion = parseInt(prompt("Ingrese la duración de la pista medida en segundos."));
-
     }
 
-    // Se crea un array que contendrá la lista de pistas
-    // array donde se van a guardar las pistas ingresadas
-    const cantidadDePistas = [];
-    
+    // Array donde se guardarán las duraciones de las pistas
+    let listaDuracionDePistas = [duracion];
 
-    listaDePistas = [cantidadDePistas];
-    console.log(listaDePistas);
-    return listaDePistas;
+    // Preguntar al usuario si quiere cargar otra pista
 
+    for (let i = 0; i < listaNombresDePistas.length; i++) {
+
+        let cargarOtraPista = confirm("Desea ingresar otra pista?");
+
+        if (!cargarOtraPista) {
+
+            break;
+
+        } else {
+            cargarOtraPista = prompt("Ingrese una nueva pista");
+            cargarOtraPista = listaNombresDePistas.push(cargarOtraPista);
+
+                // Pedir la duración de la nueva pista
+
+                duracion = parseInt(prompt("Ingrese la duración de la nueva pista"));
+
+                duracion = listaDuracionDePistas.push(duracion);
+        }
+
+    }
+    console.log(listaNombresDePistas);
+    console.log(listaDuracionDePistas);
+    return nombreDePista, duracion;
 }
 
-cargarPistas();
+cargarPistaYDuracion();
+
+
+/*
+        listaDePistas = [cantidadDePistas];
+        console.log(listaDePistas);
+        return listaDePistas;
+
+}*/
 
 
 
-// preguntar si se quiere cargar otra pista
+
+
+
+
 /*
         for (let i = 0; i < cantidadDePistas.length; i++) {
 
@@ -155,7 +156,6 @@ cargarPistas();
         }*/
 
 /*
-let cantidadDePistas = [];
 
 function cargarPistas() {
 
@@ -179,7 +179,7 @@ function cargarPistas() {
     return nombreDePista;
 }
 
-//cargarPistas();*/
+
 
 
 
