@@ -17,7 +17,7 @@ let mensaje = "";
 
 let disco = new DatosDelDisco();
 
-//Solicitar nombre del disco
+// 1) SOLICITAR NOMBRE DEL DISCO
 
 const ingresarNombreDelDisco = nombre => {
 
@@ -58,6 +58,8 @@ function guardarDisco() {
 
 guardarDisco();*/
 
+// 2) PEDIR AUTOR DEL DISCO 
+
 const autorDelDisco = autor => {
 
     this.autor = prompt("Ingrese el autor o grupo del disco");
@@ -72,6 +74,8 @@ const autorDelDisco = autor => {
 
 //autorDelDisco();
 
+// 3) PEDIR CÓDIGO DEL DISCO
+
 const codigoDeldisco = (ingresarCodigo, codigo) => {
 
     ingresarCodigo = parseInt(prompt("Ingresa el código del disco"));
@@ -84,71 +88,71 @@ const codigoDeldisco = (ingresarCodigo, codigo) => {
     while (codigo <= 0 || codigo > 999) {
 
         mensaje = alert("El código no puede ser menor a 1 ni mayor a 999. Por favor ingrese un código válido");
-        codigo = parseInt(prompt("Ingresa el código del disco nuevamente"));
+        this.codigo = parseInt(prompt("Ingresa el código del disco nuevamente"));
     }
+
+    // Se crea un array que va a guardar la var codigo para iterar en el ciclo
 
     let listaDeCodigos = [codigo];
-
-    for (let i = 0; i < listaDeCodigos.length; i++) {
-
-        const prueba = listaDeCodigos[i];
-        console.log(prueba);
-    }
-    return codigo;
-
+    console.log(listaDeCodigos);
+    return listaDeCodigos;
 
 }
 
-codigoDeldisco();
+//codigoDeldisco();
 
 
-
-// Verificar si el código ingresado está repetido: cómo?
-//Opción 1: cada dato del disco se va a ir guardando en una etiqueta html, por lo que quizá verificando en el html sería una opción
-// Para eso, primero hay que crear la función que permita crear el tag html y guardar los datos
+// 4) CARGAR LAS PISTAS
 
 
-/*
-    for(let i = 0; i < listaDeCodigos.length; i++){
+let cargarPistas = (nombreDePista, duracion) => {
 
-        listaDeCodigos = listaDeCodigos[i];
-    }
     
-    console.log(listaDeCodigos);*/
-
-
-
-/*
-const verificarCodigoUnico = verificarCodigo => {
-    verificarCodigo = codigoDeldisco();
-
-    if (verificarCodigo === codigoDeldisco) {
-        alert("Código ya existente.");
-    }
-
-}
-
-verificarCodigoUnico();*/
-
-
-
-
-// CARGAR PISTAS
-
-/*
-const cargarPistas = nombreDePista => {
-
- // pedir el nombre de la pista
+    // pedir el nombre de la pista
     nombreDePista = prompt("Ingrese el nombre de la pista");
 
+    // verificar que el dato no quede vacío
+
+    while (nombreDePista == "") {
+        mensaje = alert("Este campo es obligatorio. Por favor ingrese el nombre de la pista");
+        nombreDePista = prompt("Ingrese el nombre de la pista");
+    }
+
+    // Pedir la duración de la pista
+
+    duracion = parseInt(prompt("Ingrese la duración de la pista medida en segundos."));
+
+    // Verificar que la duración esté entre 0 y 7200 inclusive
+
+    while (duracion < 0 || duracion > 7200) {
+
+        mensaje = alert("La duración tiene que estar entre 0 y 7200 segundos inclusive. Por favor intente de nuevo");
+        duracion = parseInt(prompt("Ingrese la duración de la pista medida en segundos."));
+
+    }
+
+    // Se crea un array que contendrá la lista de pistas
     // array donde se van a guardar las pistas ingresadas
     const cantidadDePistas = [];
+    
 
-    for (let i = 0; i < cantidadDePistas.length; i++) {
-       
-        nombreDePista = cantidadDePistas[i];
-        console.log(nombreDePista);
-    }*/
+    listaDePistas = [cantidadDePistas];
+    console.log(listaDePistas);
+    return listaDePistas;
+
+}
+
+cargarPistas();
+
+
+
+// preguntar si se quiere cargar otra pista
+/*
+        for (let i = 0; i < cantidadDePistas.length; i++) {
+
+            nombreDePista = cantidadDePistas[i];
+            console.log(nombreDePista);
+        }*/
 
 /*
 let cantidadDePistas = [];
@@ -177,20 +181,33 @@ function cargarPistas() {
 
 //cargarPistas();*/
 
+
+
+
+
+//............................................
+
+// PASOS A SEGUIR LUEGO DE CARGAR EL PRIMER DISCO:
+// PREGUNTAR AL USUARIO SI QUIERE CARGAR OTRO
+// SI ES ASÍ, VERIFICAR AL CARGAR EL CÓDIGO SI ÉSTE YA ESTÁ REPETIDO
+
+// Verificar si el código ingresado está repetido: cómo?
+//Opción 1: Comparar el array listaDeCodigos con una variable que verifique en un ciclo si el código está repetido o no
+
 /*
-// pedir la duración 
-duracionDePista = parseInt(prompt("Ingrese la duración medida en segundos de la pista"));
-this.duracion = duracionDePista;
+for (let i = 0; i < listaDeCodigos.length; i++) {
 
-// Validar la duración
-
-while (duracion < 0 && duracion > 7200) {
-
-    mensaje = alert("Dato no válido. La duración tiene que estar entre los 0 y los 7200 segundos como máximo. Por favor intente de nuevo");
-    duracion = parseInt(prompt("Ingrese de nuevo la duración de la pista"));
+    const codigos = listaDeCodigos[i];
+    console.log(codigos);
 }*/
 
-/*
-return console.log(pistas, duracion);*/
 
-//cargarPistas();
+const verificarCodigoUnico = (verificarCodigo) => {
+    verificarCodigo = codigoDeldisco();
+
+    if (verificarCodigo === codigoDeldisco) {
+        alert("Código ya existente.");
+    }
+}
+
+//verificarCodigoUnico();
