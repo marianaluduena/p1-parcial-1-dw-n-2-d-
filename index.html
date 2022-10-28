@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,15 +9,18 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="./css/styles.css" />
 </head>
+
 <body>
     <header>
         <h1>Programación I | Parcial 1 | LUDUEÑA, MARIANA| MERCEDES URIBE</h1>
     </header>
     <main>
         <h2>Mis discos</h2>
-        <button onclick="cargar();">Cargar nuevo disco</button>
-        <button onclick="mostrar();">Mostrar discos</button>
-        <div id="info"></div>
+        <div id="coleccion">
+            <button onclick="cargarDatosDelDisco()">Cargar datos del disco</button>
+            <button onclick="mostrarDiscosCargados()">Mostrar discos</button>
+        </div>
+
         <script src="./js/programa.js"></script>
     </main>
     <footer>
@@ -29,4 +33,5 @@
         </ul>
     </footer>
 </body>
+
 </html>
