@@ -5,11 +5,14 @@ class DatosDelDisco {
             this.autor = autor,
             this.codigo = codigo;
     }
-    //codigo = [];
+
     pistas = [];
-    duracion = [];
+
 
 }
+
+// Array donde se guardarán los discos a medida que son cargados
+let discos = [];
 
 // 1) SOLICITAR NOMBRE DEL DISCO
 // 2) PEDIR AUTOR DEL DISCO 
@@ -30,95 +33,126 @@ const pedirDato = (mensaje) => {
 
 // 3) PEDIR CÓDIGO DEL DISCO
 
+// Array donde se guardarán los códigos de los discos para después hacer la verificación de código repetido
+
+let listaDeCodigos = [];
+
 const cargarCodigoDelDisco = () => {
     let codigo = parseInt(prompt("Ingresa el código del disco"));
 
-    // Validación para que el código ingresado esté en rango
-    if (codigo <= 0 || codigo > 999) {
+    // Validación para que el código ingresado esté en rango ni sea otro dato que no sea un número
+    if (codigo <= 0 || codigo > 999 || isNaN(codigo)) {
         mensaje = alert("El código no puede ser menor a 1 ni mayor a 999. Por favor ingrese un código válido");
 
         // Se volverá a pedir al usuario que ingrese de nuevo el código
         return cargarCodigoDelDisco();
+
+        // sino, cargar el dato del código al array 
+    } else {
+        listaDeCodigos.push(codigo);
+        console.log(listaDeCodigos);
     }
 
     return codigo;
 }
 
 // 4) PEDIR EL NOMBRE DE LA PISTA
-// 5) PEDIR DURACIÓN DE LA PISTA
 
+// Array donde se guardarán todas las pistas de cada disco
+
+
+
+/*
+const pedirPistasYDuracion = () => {
+
+    do {
+        pista = pedirDato("Ingrese el nombre de la pista");
+        duracion = cargarCodigoDelDisco();
+        // Ya tengo el nombre de la pista y la duración
+        // Generar un nuevo objeto donde guardar ambos datos
+
+       let datosDePista = {
+            nombrePista: nombrePista,
+            duracionPista: duracionPista
+        };
+
+        // Guardar el nombre de la pista en el array todasLasPistas[]
+
+        todasLasPistas.push(datosDePista);
+
+    } while (confirm("Ingresar otra pista?"));
+
+}*/
+
+let todasLasPistas = [];
+
+const pedirPista = () => {
+
+    let nombrePista = "";
+    let duracionPista;
+
+    do {
+        nombrePista = pedirDato("Ingrese el nombre de la pista");
+
+        // 5) PEDIR DURACIÓN DE LA PISTA
+
+        duracionPista = cargarDuracionDelDisco();
+
+        todasLasPistas.push({
+            nombre: nombrePista,
+            duracion: duracionPista
+
+        });
+
+        // 6) PREGUNTAR AL USUARIO SI DESEA CARGAR OTRA PISTA
+
+    } while (confirm("Desea cargar otra pista?"))
+
+}
+
+// Array donde se guardarán las duraciones de cada pista
+let listaDeDuracionDePistas = [];
 
 const cargarDuracionDelDisco = () => {
     let segundos = parseInt(prompt("Ingrese la duración de la pista medida en segundos"));
 
     // Validación de la duración de la pista
 
-    if (segundos < 0 || segundos > 7200) {
+    if (segundos < 0 || segundos > 7200 || isNaN(segundos)) {
 
         mensaje = alert("La cantidad de segundos no puede ser menor a 0 ni mayor a 7200. Por favor ingrese un código válido");
 
         // Se volverá a pedir al usuario que ingrese de nuevo el código
         return cargarDuracionDelDisco();
-
     }
+
     return segundos;
 }
 
-// 6) PREGUNTAR AL USUARIO SI DESEA CARGAR OTRA PISTA
 
-function cargarOtraPista() {
-
-    // Pistas ya tiene previamente un dato cargado
-    pistas = [-1];
-
-    for (var i = 0; i < pistas.length; i++) {
-
-        let ingresarOtraPista = confirm("Desea agregar otra pista?");
-
-        if (!ingresarOtraPista) {
-            break;
-        }else{
-            pistas = pedirDato("Ingresa el nombre de la pista");
-            duracion = cargarDuracionDelDisco();
-        }
-        ingresarOtraPista = pistas[i];
-    }
-       return pistas;
-}
-
-
-
+// Función para cargar los datos del disco al darle click al botón Cargar
 function cargarDatosDelDisco() {
 
     nombre = pedirDato("Ingrese el nombre del disco");
     autor = pedirDato("Ingrese el autor del disco");
     codigo = cargarCodigoDelDisco();
-    pistas = pedirDato("Ingresa el nombre de la pista");
-    duracion = cargarDuracionDelDisco();
-    cargarOtraPista();
+    pedirPista()
+
 }
+
 
 function mostrarDiscosCargados() {
 
-    // Las variables ya tienen los datos del usuario
+    // Usar map
 
-    nombre;
-    autor;
-    codigo;
-    pistas;
-    duracion;
-
-    let disco = new DatosDelDisco(nombre, autor);
-    disco.codigo = codigo;
-    disco.pistas = pistas;
-    disco.duracion = duracion;
+    let disco = new DatosDelDisco(nombre, autor, codigo);
+    disco.pistas = todasLasPistas;
 
     html = `<ul>
     <li>${disco.nombre}</li>
     <li>${disco.autor}</li>
     <li>${disco.codigo}</li>
     <li>${disco.pistas}</li>
-    <li>${disco.duracion}</li>
    </ul>`;
 
     document.getElementById("coleccion").innerHTML = html;
@@ -150,4 +184,4 @@ const verificarCodigoUnico = (verificarCodigo) => {
     }
 }*
 
-//verificarCodigoUnico();*/    
+//verificarCodigoUnico();*/
