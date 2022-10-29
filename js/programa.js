@@ -60,30 +60,6 @@ const cargarCodigoDelDisco = () => {
 
 // Array donde se guardarán todas las pistas de cada disco
 
-
-
-/*
-const pedirPistasYDuracion = () => {
-
-    do {
-        pista = pedirDato("Ingrese el nombre de la pista");
-        duracion = cargarCodigoDelDisco();
-        // Ya tengo el nombre de la pista y la duración
-        // Generar un nuevo objeto donde guardar ambos datos
-
-       let datosDePista = {
-            nombrePista: nombrePista,
-            duracionPista: duracionPista
-        };
-
-        // Guardar el nombre de la pista en el array todasLasPistas[]
-
-        todasLasPistas.push(datosDePista);
-
-    } while (confirm("Ingresar otra pista?"));
-
-}*/
-
 let todasLasPistas = [];
 
 const pedirPista = () => {
@@ -152,7 +128,11 @@ function mostrarDiscosCargados() {
     <li>${disco.nombre}</li>
     <li>${disco.autor}</li>
     <li>${disco.codigo}</li>
-    <li>${disco.pistas}</li>
+    <ul> ${disco.pistas.map(pista => { 
+        return `<li style="color:red">${pista.nombre} ${pista.duracion}</li>` 
+    })} 
+    
+    </ul>
    </ul>`;
 
     document.getElementById("coleccion").innerHTML = html;
