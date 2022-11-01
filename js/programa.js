@@ -1,3 +1,5 @@
+"use strict"
+
 class DatosDelDisco {
     constructor(nombre, autor, codigo) {
 
@@ -7,7 +9,6 @@ class DatosDelDisco {
     }
 
     pistas = [];
-
 
 }
 
@@ -57,7 +58,7 @@ const cargarCodigoDelDisco = () => {
 
 // Array donde se guardarán todas las pistas de cada disco
 
-let todasLasPistas = [];
+ let todasLasPistas = [];
 
 const pedirPista = () => {
 
@@ -76,6 +77,7 @@ const pedirPista = () => {
 
         // En el array vacío todasLasPistas se guardarán el nombre y la duración de cada pista
 
+    
         todasLasPistas.push({
             nombre: nombrePista,
             duracion: duracionPista
@@ -85,7 +87,7 @@ const pedirPista = () => {
         // 6) PREGUNTAR AL USUARIO SI DESEA CARGAR OTRA PISTA
 
     } while (confirm("Desea cargar otra pista?"))
-
+    return todasLasPistas;
 }
 
 
@@ -105,7 +107,7 @@ const cargarDuracionDelDisco = () => {
     return segundos;
 }
 
- // 7) PINTAR DE ROJO LAS PISTAS MAYORES A 180 EN LA FUNCIÓN MOSTRAR DISCOS
+// 7) PINTAR DE ROJO LAS PISTAS MAYORES A 180 EN LA FUNCIÓN MOSTRAR DISCOS
 
 
 // Array donde se guardarán los discos a medida que son cargados
@@ -113,36 +115,35 @@ let discos = [];
 
 // Variables a llenar al cargar los datos
 
-let nombreDelDisco = "";
-let autorDelDisco = "";
-let codigoDelDisco;
-let datosDePistaDelDisco;
+let nombre = "";
+let autor = "";
+let codigo;
+let pista;
 
 // Función para cargar los datos del disco al darle click al botón Cargar
 
 function cargarDatosDelDisco() {
 
     do {
+        
         nombre = pedirDato("Ingrese el nombre del disco");
         autor = pedirDato("Ingrese el autor del disco");
         codigo = cargarCodigoDelDisco();
         pista = pedirPista();
 
+
+
         discos.push({
 
-            nombreDelDisco: nombre,
-            autorDelDisco: autor,
-            codigoDelDisco: codigo,
-            datosDePistaDelDisco: pista
+            nombre: nombre,
+            autor: autor,
+            codigo: codigo,
+            pistas: pista
 
         });
         // Preguntar al usuario si desea cargar un nuevo disco
 
     } while (confirm("Desea cargar otro disco?"))
-    /* nombre = pedirDato("Ingrese el nombre del disco");
-     autor = pedirDato("Ingrese el autor del disco");
-     codigo = cargarCodigoDelDisco();
-     pedirPista();*/
 
 }
 
@@ -151,37 +152,40 @@ function mostrarDiscosCargados() {
 
     // Se creará uno objeto llamado disco
 
-    let disco = new DatosDelDisco(nombre, autor, codigo);
+    //let disco = new DatosDelDisco(nombre, autor, codigo);
 
     // .pistas es el array definido dentro del objeto, por lo que se le agregarán datos al objeto disco cuya propiedad es pistas
-    disco.pistas = todasLasPistas; // todasLasPistas tiene los datos ingresados por el usuario
+  
 
-    let color = "";
+    // Verificar la duración de las pistas y pintar de rojo las que sean mayores a 180
 
-// Verificar la duración de las pistas y pintar de rojo las que sean mayores a 180
+    //duracionesMayoresA180 = todasLasPistas.map(duracion )
+    /*
+    duracionesMayoresA180 = disco.pistas.map( duracionSegundos => {
+
+        return duracionSegundos;
+    });*/
 
 
+let html = "";
 
-    
-/*
-    if ( disco.pistas[duracion[0]] >= 180) {
-   
-        color = "red";
-    }*/
+discos.forEach(disco => {
 
-    html = `<ul>
+    html += `<ul>
     <li>Nombre del disco: <strong> ${disco.nombre} </strong> </li>
     <li>Autor/ banda: <strong> ${disco.autor} </strong> </li>
     <li>Código único del disco: <strong> ${disco.codigo} </strong> </li>
     <div>
     <ul>Lista de pistas y duración: ${disco.pistas.map(pista => { 
         return `
-        <li> <strong> ${pista.nombre}</strong>: <span style = "color: ${color}">${pista.duracion} </span> segundos</li>` 
+        <li> <strong> ${pista.nombre}</strong>: <span class= "highlight__red"> ${pista.duracion} </span> segundos</li>` 
     })} 
     
     </ul>
     <div>
    </ul>`;
+
+})
 
     document.getElementById("coleccion").innerHTML = html;
 }
