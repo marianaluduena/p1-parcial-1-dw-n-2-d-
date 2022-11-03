@@ -55,23 +55,23 @@ const cargarCodigoDelDisco = () => {
         // sino, cargar el dato del código al array }
 
     } else {
+
+        // VERIFICAR SI EL CÓDIGO YA FUE CARGADO ANTES
+
+        const codigoUnico = listaDeCodigos.find((codigoUnico) => codigoUnico == codigo);
+
+        while (codigoUnico) {
+
+            mensajeDeAlerta = alert("Código ya existente. Por favor ingrese un dato válido");
+            return cargarCodigoDelDisco();
+
+        }
         listaDeCodigos.push(codigo);
         console.log(listaDeCodigos);
+        return codigo;
     }
 
-    return codigo;
 }
-
-// VERIFICAR AL CARGAR EL CÓDIGO SI ÉSTE YA ESTÁ REPETIDO
-
-/*
-const verificarCodigoUnico = (codigoUnico, listaDeCodigos) => {
-
-    const codigoYaExistente = listaDeCodigos.find((codigoUnico) => codigoUnico == codigo);
-    mensaje = alert("Código ya existente. Por favor intente de nuevo");
-    return cargarCodigoDelDisco();
-}
-*/
 
 // 4) PEDIR EL NOMBRE DE LA PISTA
 
@@ -160,6 +160,12 @@ function cargarDatosDelDisco() {
         nombre = pedirDato("Ingrese el nombre del disco");
         autor = pedirDato("Ingrese el autor del disco");
         codigo = cargarCodigoDelDisco();
+
+
+
+        /*listaDeCodigos.push(codigo);
+        console.log(listaDeCodigos);*/
+
         pistas = pedirPista();
 
         discos.push({
@@ -170,21 +176,15 @@ function cargarDatosDelDisco() {
             pista: pistas
 
         });
+
     }
+
 
     // Preguntar al usuario si desea cargar un nuevo disco
 
     while (confirm("Desea cargar otro disco?"))
 
 }
-
-/*
-let codigoUnico = listaDeCodigos.find(codigo == codigo) {
-
-    mensaje = alert("El código ingresado ya existe. Por favor intente de nuevo");
-
-    return cargarCodigoDelDisco();
-}*/
 
 
 function mostrarDiscosCargados() {
