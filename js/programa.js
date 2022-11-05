@@ -36,7 +36,7 @@ const pedirDato = (mensaje) => {
         return pedirDato(mensaje);
 
     } else {
-        
+
         return valor;
     }
 
@@ -86,11 +86,12 @@ const cargarCodigoDelDisco = () => {
 
 // 4) PEDIR EL NOMBRE DE LA PISTA
 
-// Array donde se guardarán todas las pistas de cada disco
-
-let todasLasPistas = [];
-
 const pedirPista = () => {
+
+
+    // Array donde se guardarán todas las pistas de cada disco
+
+    let todasLasPistas = [];
 
     // Declaro las variables donde se guardarán los datos solicitados
 
@@ -185,10 +186,6 @@ function cargarDatosDelDisco() {
             pista: JSON.parse(JSON.stringify(pista)) // Convierte primero a string y después a un objeto
 
         });
-
-        // Reinicio el objeto
-
-        todasLasPistas = [];
     }
 
 
@@ -204,12 +201,14 @@ function mostrarDiscosCargados() {
 
     let html = "";
 
-    discos.forEach( disco => {
+    discos.forEach(disco => {
 
         html += `<ul>
     <li>Nombre del disco: <strong> ${disco.nombre} </strong> </li>
     <li>Autor/ banda: <strong> ${disco.autor} </strong> </li>
     <li>Código único del disco: <strong> ${disco.codigo} </strong> </li>
+    </ul>
+    
     <div>
     <ul>Lista de pistas y duración: ${disco.pista.map(pistas => { 
         return `
@@ -218,7 +217,7 @@ function mostrarDiscosCargados() {
     
     </ul>
     <div>
-   </ul>`;
+        `;
 
     })
 
