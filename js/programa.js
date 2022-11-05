@@ -22,7 +22,7 @@ let mensajeDeAlerta = "";
 const pedirDato = (mensaje) => {
 
     // La variable valor se reutilizará en cada dato string solicitado en el programa
-    
+
     let valor = prompt(mensaje);
 
     // Si no se ingresa nada al solicitar el dato se disparará un alert para solicitarlo de nuevo
@@ -36,6 +36,7 @@ const pedirDato = (mensaje) => {
         return pedirDato(mensaje);
 
     } else {
+        
         return valor;
     }
 
@@ -61,7 +62,7 @@ const cargarCodigoDelDisco = () => {
 
         return cargarCodigoDelDisco();
 
-        // sino, cargar el dato del código al array }
+        // sino, cargar el dato del código al array 
 
     } else {
 
@@ -78,7 +79,6 @@ const cargarCodigoDelDisco = () => {
         }
 
         listaDeCodigos.push(codigo);
-        console.log(listaDeCodigos);
         return codigo;
     }
 
@@ -164,7 +164,7 @@ let discos = [];
 let nombre = "";
 let autor = "";
 let codigo;
-let pistas;
+let pista;
 
 // Función para cargar los datos del disco al darle click al botón Cargar
 
@@ -175,17 +175,20 @@ function cargarDatosDelDisco() {
         nombre = pedirDato("Ingrese el nombre del disco");
         autor = pedirDato("Ingrese el autor del disco");
         codigo = cargarCodigoDelDisco();
-        pistas = pedirPista();
+        pista = pedirPista();
 
         discos.push({
 
             nombre: nombre,
             autor: autor,
             codigo: codigo,
-            pista: pistas
+            pista: JSON.parse(JSON.stringify(pista)) // Convierte primero a string y después a un objeto
 
         });
 
+        // Reinicio el objeto
+
+        todasLasPistas = [];
     }
 
 
@@ -198,10 +201,10 @@ function cargarDatosDelDisco() {
 
 function mostrarDiscosCargados() {
 
- 
+
     let html = "";
 
-    discos.forEach(disco => {
+    discos.forEach( disco => {
 
         html += `<ul>
     <li>Nombre del disco: <strong> ${disco.nombre} </strong> </li>
