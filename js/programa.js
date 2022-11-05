@@ -20,14 +20,19 @@ let mensajeDeAlerta = "";
 // 2) PEDIR AUTOR DEL DISCO 
 
 const pedirDato = (mensaje) => {
+
     // La variable valor se reutilizará en cada dato string solicitado en el programa
+    
     let valor = prompt(mensaje);
 
     // Si no se ingresa nada al solicitar el dato se disparará un alert para solicitarlo de nuevo
+
     if (valor == "" || !isNaN(valor)) {
+
         mensajeDeAlerta = alert("No puede dejar este campo en blanco ni el dato ser un número. Por favor intente de nuevo.");
 
         // Se le pedirá al usuario que ingese de nuevo el dato
+
         return pedirDato(mensaje);
 
     } else {
@@ -43,13 +48,17 @@ const pedirDato = (mensaje) => {
 let listaDeCodigos = [];
 
 const cargarCodigoDelDisco = () => {
+
     codigo = parseInt(prompt("Ingresa el código del disco"));
 
     // Validación para que el código ingresado esté en rango ni sea otro dato que no sea un número
+
     if (codigo <= 0 || codigo > 999 || isNaN(codigo)) {
+
         mensajeDeAlerta = alert("El código no puede ser menor a 1 ni mayor a 999. Por favor ingrese un código válido");
 
         // Se volverá a pedir al usuario que ingrese de nuevo el código
+
         return cargarCodigoDelDisco();
 
         // sino, cargar el dato del código al array }
@@ -63,9 +72,11 @@ const cargarCodigoDelDisco = () => {
         while (codigoUnico) {
 
             mensajeDeAlerta = alert("Código ya existente. Por favor ingrese un dato válido");
+
             return cargarCodigoDelDisco();
 
         }
+
         listaDeCodigos.push(codigo);
         console.log(listaDeCodigos);
         return codigo;
@@ -118,11 +129,13 @@ const pedirPista = () => {
     // 6) PREGUNTAR AL USUARIO SI DESEA CARGAR OTRA PISTA
 
     while (confirm("Desea cargar otra pista?"))
+
     return todasLasPistas;
 }
 
 
 const cargarDuracionDelDisco = () => {
+
     let segundos = parseInt(prompt("Ingrese la duración de la pista medida en segundos"));
 
     // Validación de la duración de la pista
@@ -132,6 +145,7 @@ const cargarDuracionDelDisco = () => {
         mensajeDeAlerta = alert("La cantidad de segundos no puede ser menor o igual a 0 ni mayor a 7200. Por favor ingrese un código válido");
 
         // Se volverá a pedir al usuario que ingrese de nuevo el código
+
         return cargarDuracionDelDisco();
     }
 
@@ -142,6 +156,7 @@ const cargarDuracionDelDisco = () => {
 
 
 // Array donde se guardarán los discos a medida que son cargados
+
 let discos = [];
 
 // Variables a llenar al cargar los datos
@@ -160,12 +175,6 @@ function cargarDatosDelDisco() {
         nombre = pedirDato("Ingrese el nombre del disco");
         autor = pedirDato("Ingrese el autor del disco");
         codigo = cargarCodigoDelDisco();
-
-
-
-        /*listaDeCodigos.push(codigo);
-        console.log(listaDeCodigos);*/
-
         pistas = pedirPista();
 
         discos.push({
@@ -189,23 +198,7 @@ function cargarDatosDelDisco() {
 
 function mostrarDiscosCargados() {
 
-    // Se creará uno objeto llamado disco
-
-    //let disco = new DatosDelDisco(nombre, autor, codigo);
-
-    // .pistas es el array definido dentro del objeto, por lo que se le agregarán datos al objeto disco cuya propiedad es pistas
-
-
-    // Verificar la duración de las pistas y pintar de rojo las que sean mayores a 180
-
-    //duracionesMayoresA180 = todasLasPistas.map(duracion )
-    /*
-    duracionesMayoresA180 = disco.pistas.map( duracionSegundos => {
-
-        return duracionSegundos;
-    });*/
-
-
+ 
     let html = "";
 
     discos.forEach(disco => {
