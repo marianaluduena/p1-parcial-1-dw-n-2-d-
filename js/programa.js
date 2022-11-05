@@ -1,15 +1,53 @@
 "use strict"
 
-class DatosDelDisco {
-    constructor(nombre, autor, codigo) {
+class Disco {
+    constructor(nombre, autor, codigo, pistas) {
 
-        this.nombre = nombre,
-            this.autor = autor,
-            this.codigo = codigo;
+        this.nombre = nombre;
+        this.autor = autor;
+        this.codigo = codigo;
+        this.pistas = pistas;
     }
 
-    pistas = [];
+    obtenerDuracion() {
 
+        // Iterar en las pistas e ir incrementando el número
+
+        let duracionTotal = 0;
+
+        // Por cada pista en el objeto Disco.pistas
+
+        for (const pista of this.pistas) {
+
+            // añadir al contador la duración de cada pista
+
+            duracionTotal += pista.duracion
+        }
+
+        return duracionTotal;
+    }
+
+    obtenerDuracionMasAlta() {
+
+        let pistaMasAlta = 0;
+
+
+        for (const pista of this.pistas) {
+
+            if (pista.duracion > pistaMasAlta) {
+
+                pistaMasAlta = pista.duracion;
+            }
+        }
+        return pistaMasAlta;
+    }
+
+    obtenerPromedio() {
+
+        // Media / total
+
+        return this.obtenerDuracion() / this.pistas.length
+    }
 }
 
 // VARIABLES GLOBALES
@@ -178,14 +216,13 @@ function cargarDatosDelDisco() {
         codigo = cargarCodigoDelDisco();
         pista = pedirPista();
 
-        discos.push({
+        // Creo acá un objeto llamado disco
 
-            nombre: nombre,
-            autor: autor,
-            codigo: codigo,
-            pista: JSON.parse(JSON.stringify(pista)) // Convierte primero a string y después a un objeto
+        let disco = new Disco(nombre, autor, codigo, pista)
 
-        });
+        // al array discos le agrego el nuevo disco con sus datos cargados
+
+        discos.push(disco);
     }
 
 
@@ -198,6 +235,11 @@ function cargarDatosDelDisco() {
 
 function mostrarDiscosCargados() {
 
+    let listaDiscos = "";
+    listaDiscos += `
+     <p>Usted lleva cargados: ${discos.length} discos</p>
+
+     `
 
     let html = "";
 
@@ -207,12 +249,18 @@ function mostrarDiscosCargados() {
     <li>Nombre del disco: <strong> ${disco.nombre} </strong> </li>
     <li>Autor/ banda: <strong> ${disco.autor} </strong> </li>
     <li>Código único del disco: <strong> ${disco.codigo} </strong> </li>
+    <li>Cantidad de pistas del disco: <strong> ${disco.pistas.length} </strong> </li>
+    <li>Duración total del disco: <strong> ${disco.obtenerDuracion()} </strong> segundos</li>
+    <li>Duración promedio del disco: <strong> ${disco.obtenerPromedio()} </strong> segundos </li>
+    <li>Pista más alta del disco: <strong> ${disco.obtenerDuracionMasAlta()} </strong> segundos</li>
+  
     </ul>
     
     <div>
-    <ul>Lista de pistas y duración: ${disco.pista.map(pistas => { 
+    <ul>Lista de pistas y duración: ${disco.pistas.map(pistas => { 
         return `
-        <li> <strong> ${pistas.nombre}</strong>: <span class= "highlight__red"> ${pistas.duracion} </span> segundos</li>` 
+        <li> <strong> ${pistas.nombre}</strong>: <span class= "highlight__red"> ${pistas.duracion} </span> segundos</li>
+        ` 
     })} 
     
     </ul>
@@ -221,5 +269,8 @@ function mostrarDiscosCargados() {
 
     })
 
+   
+    document.getElementById("listaDiscos").innerHTML = listaDiscos;
     document.getElementById("coleccion").innerHTML = html;
+    
 }
