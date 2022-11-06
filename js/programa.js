@@ -53,6 +53,7 @@ class Disco {
 // VARIABLES GLOBALES
 
 let mensajeDeAlerta = "";
+let color;
 
 // 1) SOLICITAR NOMBRE DEL DISCO
 // 2) PEDIR AUTOR DEL DISCO 
@@ -177,6 +178,9 @@ const cargarDuracionDelDisco = () => {
 
     let segundos = parseInt(prompt("Ingrese la duración de la pista medida en segundos"));
 
+    //color = segundos >= 180 ? color = "red" : color = "black";
+
+
     // Validación de la duración de la pista
 
     if (segundos <= 0 || segundos > 7200 || isNaN(segundos)) {
@@ -186,12 +190,13 @@ const cargarDuracionDelDisco = () => {
         // Se volverá a pedir al usuario que ingrese de nuevo el código
 
         return cargarDuracionDelDisco();
-    }
+
+    } 
 
     return segundos;
 }
 
-// 7) PINTAR DE ROJO LAS PISTAS MAYORES A 180 EN LA FUNCIÓN MOSTRAR DISCOS
+
 
 
 // Array donde se guardarán los discos a medida que son cargados
@@ -236,7 +241,9 @@ function cargarDatosDelDisco() {
 function mostrarDiscosCargados() {
 
     let listaDiscos = "";
-    listaDiscos += `
+    listaDiscos +=
+
+        `
      <p>Usted lleva cargados: ${discos.length} discos</p>
 
      `
@@ -259,7 +266,7 @@ function mostrarDiscosCargados() {
     <div>
     <ul>Lista de pistas y duración: ${disco.pistas.map(pistas => { 
         return `
-        <li> <strong> ${pistas.nombre}</strong>: <span class= "highlight__red"> ${pistas.duracion} </span> segundos</li>
+        <li> <strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "black"}"> ${pistas.duracion} </span> segundos</li>
         ` 
     })} 
     
@@ -269,8 +276,8 @@ function mostrarDiscosCargados() {
 
     })
 
-   
+
     document.getElementById("listaDiscos").innerHTML = listaDiscos;
     document.getElementById("coleccion").innerHTML = html;
-    
+
 }
