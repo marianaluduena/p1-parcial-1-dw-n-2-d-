@@ -9,6 +9,18 @@ class Disco {
         this.pistas = pistas;
     }
 
+    obtenerNombre(){
+
+        let nombreDeLaPista = "";
+
+        for(const pista of this.pistas){
+
+          nombreDeLaPista = pista.nombre;
+        }
+
+        return nombreDeLaPista;
+    }
+
     obtenerDuracion() {
 
         // Iterar en las pistas e ir incrementando el número
@@ -48,6 +60,7 @@ class Disco {
 
         return this.obtenerDuracion() / this.pistas.length
     }
+
 }
 
 // VARIABLES GLOBALES
@@ -89,7 +102,7 @@ let listaDeCodigos = [];
 
 const cargarCodigoDelDisco = () => {
 
-    codigo = parseInt(prompt("Ingresa el código del disco"));
+    codigo = parseInt(prompt("Ingrese el código del disco"));
 
     // Validación para que el código ingresado esté en rango ni sea otro dato que no sea un número
 
@@ -247,6 +260,8 @@ function mostrarDiscosCargados() {
 
     let html = "";
 
+    
+
     discos.forEach(disco => {
 
         html += `<ul>
@@ -257,6 +272,7 @@ function mostrarDiscosCargados() {
     <li>Duración total del disco: <strong> ${disco.obtenerDuracion()} </strong> segundos</li>
     <li>Duración promedio del disco: <strong> ${disco.obtenerPromedio()} </strong> segundos </li>
     <li>Pista más alta del disco: <strong> ${disco.obtenerDuracionMasAlta()} </strong> segundos</li>
+    
   
     </ul>
     
@@ -264,9 +280,10 @@ function mostrarDiscosCargados() {
     <ul>Lista de pistas y duración: ${disco.pistas.map(pistas => { 
         return `
         <li> <strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "black"}"> ${pistas.duracion} </span> segundos</li>
+       
+      
         ` 
     })} 
-    
     </ul>
     <div>
         `;
