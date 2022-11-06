@@ -196,9 +196,6 @@ const cargarDuracionDelDisco = () => {
     return segundos;
 }
 
-
-
-
 // Array donde se guardarán los discos a medida que son cargados
 
 let discos = [];
