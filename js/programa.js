@@ -254,7 +254,7 @@ function mostrarDiscosCargados() {
     listaDiscos +=
 
         `
-     <p>Usted lleva cargados: ${discos.length} discos</p>
+     <p>Usted lleva cargados: ${discos.length} disco/s</p>
 
      `
 
@@ -270,7 +270,7 @@ function mostrarDiscosCargados() {
     <li>Código único del disco: <strong> ${disco.codigo} </strong> </li>
     <li>Cantidad de pistas del disco: <strong> ${disco.pistas.length} </strong> </li>
     <li>Duración total del disco: <strong> ${disco.obtenerDuracion()} </strong> segundos</li>
-    <li>Duración promedio del disco: <strong> ${disco.obtenerPromedio()} </strong> segundos </li>
+    <li>Duración promedio del disco: <strong> ${Math.round(disco.obtenerPromedio())} </strong> segundos </li>
     <li>Pista más alta del disco: <strong> ${disco.obtenerDuracionMasAlta()} </strong> segundos</li>
     
   
@@ -279,11 +279,12 @@ function mostrarDiscosCargados() {
     <div>
     <ul>Lista de pistas y duración: ${disco.pistas.map(pistas => { 
         return `
-        <li> <strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "black"}"> ${pistas.duracion} </span> segundos</li>
+        <li> <strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "blue"}"> ${pistas.duracion} </span> segundos</li>
        
       
         ` 
     })} 
+   
     </ul>
     <div>
         `;
