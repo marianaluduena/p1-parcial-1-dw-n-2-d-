@@ -152,17 +152,17 @@ li{
      font-style: italic;
  }
  
- main button {
-     margin: .5em 0;
-     border: none;
-     border-radius: .5em;
-     padding: .25em .5em;
-     background: #134F5C;
-     cursor: pointer;
-     font-size: 2.4em;
-     line-height: 1.5;
+
+ button{
+    font-size: 2.5rem;
+    background-color: rgb(229, 19, 177);
+    color: whitesmoke;
+    border-radius: 10px;
+    margin: .5em 0;
+    padding: .25em .5em;;
+    cursor: pointer;
+    line-height: 1.5;
      text-align: center;
-     color: #D0E0E3;
  }
  
  main div.galeria {
