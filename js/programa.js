@@ -191,9 +191,6 @@ const cargarDuracionDelDisco = () => {
 
     let segundos = parseInt(prompt("Ingrese la duración de la pista medida en segundos"));
 
-    //color = segundos >= 180 ? color = "red" : color = "black";
-
-
     // Validación de la duración de la pista
 
     if (segundos <= 0 || segundos > 7200 || isNaN(segundos)) {
@@ -260,8 +257,6 @@ function mostrarDiscosCargados() {
 
     let html = "";
 
-    
-
     discos.forEach(disco => {
 
         html += `<ul>
@@ -273,22 +268,19 @@ function mostrarDiscosCargados() {
     <li>Duración promedio del disco: <strong> ${Math.round(disco.obtenerPromedio())} </strong> segundos </li>
     <li>Pista más alta del disco: <strong> ${disco.obtenerDuracionMasAlta()} </strong> segundos</li>
     
-  
     </ul>
     
     <div>
     <ul>Lista de pistas y duración: ${disco.pistas.map(pistas => { 
         return `
-        <li> <strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "blue"}"> ${pistas.duracion} </span> segundos</li>
-       
-      
+        <li><strong> ${pistas.nombre}</strong>: <span style= "color: ${pistas.duracion >= 180 ? "red" : "blue"}">${pistas.duracion}</span> segundos</li>
+        
         ` 
     })} 
    
     </ul>
     <div>
         `;
-
     })
 
 
